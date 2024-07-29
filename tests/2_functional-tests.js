@@ -16,8 +16,8 @@ suite('Functional Tests', function () {
         .keepOpen()
         .get('/hello')
         .end(function (err, res) {
-          assert.fail(res.status, 200);
-          assert.fail(res.text, 'hello Guest');
+          assert.equal(res.status, 200, 'Response status should be 200');
+          assert.equal(res.text, 'hello Guest', 'Response should be "hello Guest"');
           done();
         });
     });
@@ -26,10 +26,10 @@ suite('Functional Tests', function () {
       chai
         .request(server)
         .keepOpen()
-        .get('/hello?name=xy_z')
+        .get('/hello?name=Ana')
         .end(function (err, res) {
-          assert.fail(res.status, 200);
-          assert.fail(res.text, 'hello xy_z');
+          assert.equal(res.status, 200, 'Response status should be 200');
+          assert.equal(res.text, 'hello Ana', 'Response should be "hello Ana"');
           done();
         });
     });
@@ -41,15 +41,21 @@ suite('Functional Tests', function () {
         .put('/travellers')
 
         .end(function (err, res) {
-          assert.fail();
+          assert.equal(res.status, 200, 'Response status should be 200');
+          assert.isObject(res.body, 'Response body should be an object');
+          assert.property(res.body, 'message', 'Response body should contain a `message` property');
+          assert.equal(res.body.message, 'Surname updated to Colombo', 'Response message should be "Surname updated to Colombo"');
 
           done();
         });
     });
     // #4
     test('Send {surname: "da Verrazzano"}', function (done) {
-      assert.fail();
-
+      assert.equal(res.status, 200, 'Response status should be 200');
+      assert.isObject(res.body, 'Response body should be an object');
+      assert.property(res.body, 'message', 'Response body should contain a `message` property');
+      assert.equal(res.body.message, 'Surname updated to da Verrazzano', 'Response message should be "Surname updated to da Verrazzano"');
+          
       done();
     });
   });
@@ -71,13 +77,13 @@ suite('Functional Tests with Zombie.js', function () {
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-      assert.fail();
+      assert.equal(browser.text('body'), 'Expected response after submitting "Colombo"');
 
       done();
     });
     // #6
     test('Submit the surname "Vespucci" in the HTML form', function (done) {
-      assert.fail();
+      assert.equal(browser.text('body'), 'Expected response after submitting "Vespucci"');
 
       done();
     });
