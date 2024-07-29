@@ -90,8 +90,8 @@ suite('Unit Tests', function () {
   suite('Arrays', function () {
     // #11
     test('#isArray, #isNotArray', function () {
-      assert.isNotArray('isThisAnArray?'.split(''), 'String.prototype.split() returns an array');
-      assert.isArray([1, 2, 3].indexOf(2), 'indexOf returns a number');
+      assert.isArray('isThisAnArray?'.split(''), 'String.prototype.split() returns an array');
+      assert.isNotArray([1, 2, 3].indexOf(2), 'indexOf returns a number');
     });
     // #12
     test('Array #include, #notInclude', function () {
